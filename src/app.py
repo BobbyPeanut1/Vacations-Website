@@ -6,7 +6,6 @@ from views.vacations_view import vacations_blueprint
 from views.like_view import like_blueprint
 from utils.app_config import AppConfig
 
-# flask --app src/app.py run --debug
 
 app = Flask(__name__)
 
