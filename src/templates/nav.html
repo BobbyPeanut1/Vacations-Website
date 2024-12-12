@@ -1,0 +1,21 @@
+{% set current_user = session.get("current_user") %}
+
+<div class="navigation-wrapper">
+    <div class="navigation-options">
+        <a href="{{url_for('home_view.home')}}"   {% if active == 'home' %} id = "active" {% endif %}>Home</a>
+        {% if current_user["roleId"] == user_role or current_user["roleId"] == admin_role%}
+        <a href="{{url_for('vacations_view.vacations_list')}}" {% if active == 'vacations' %} id = "active"  class="activeCheck" {% endif %}>Vacation list</a>
+        {% endif %}
+        {% if current_user["roleId"] == admin_role %}
+        <a href="{{url_for('vacations_view.add_vacation')}}" {% if active == 'insert' %} id = "active" class="activeCheck" {% endif %}>Add vacation</a>
+        {% endif %}
+    </div>
+
+    <div class="webName">
+        <span>EasyTour</span>
+    </div> 
+
+    <div class="navigation-auth-options">
+        {% include 'auth.html' %}
+    </div>
+</div>

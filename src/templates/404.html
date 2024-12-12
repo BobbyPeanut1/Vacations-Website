@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+Page not found
+{% endblock title %}
+
+
+{% block content %}
+{% set current_user = session.get("current_user") %}
+
+<div class="wrapper404Gif">
+    <div class="title404BoxGif">
+        <h1>Error: the page you are looking for doesn't exist :/</h1>
+    </div>
+    <br>
+    <div class="gif404Container">
+        <img class="gif404" src="../static/images/error_pages_gifs/404.gif" alt="404 page not found gif">
+    </div>
+    <br>
+    <br>
+    <a class="customButton" href="{{url_for('home_view.home')}}">Go back home</a>
+    
+</div>
+
+{% endblock content %}

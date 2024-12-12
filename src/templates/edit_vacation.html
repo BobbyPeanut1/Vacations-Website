@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+Edit vacation
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="insert-form-wrapper">
+    <h1>Edit your vacation</h1>
+
+    <form method="post"  enctype="multipart/form-data">
+            <input type="hidden" value="{{vacation.vacationId}}" name="id"> 
+            <label class="inputText">Country</label>
+            <select id="ad" name="country_name" class="form-input" required>
+            {% for country in countries_dicts %}
+                {% if country["countryId"] == vacation.countryId %}
+                    <option value='{{country["countryId"]}}' selected>{{country["countryName"]}}</option>
+
+                {% else %}
+                    <option value='{{country["countryId"]}}'>{{country["countryName"]}}</option>
+
+                {% endif %}
+            {% endfor %}
+            </select>
+            <br>
+            <label class="inputText">Start date</label>
+            <input type="date" value="{{vacation.vacationStartDate}}" name="start_date" class="form-input" required>
+            <br>
+            <label class="inputText">End date</label>
+            <input type="date" value = "{{vacation.vacationEndDate}}" name="end_date" class="form-input" required>
+            <br>
+            <label class="inputText">Price</label>
+            <input type="number" value="{{vacation.vacationPrice}}" name="price" class="form-input" min="0" max="10000" required>
+            <br>
+            <label class="inputText">Description</label>
+            <textarea type="text" name="description" class="form-input" minlength="0" maxlength="800" cols="5" rows="5" required>{{vacation.vacationDescription}}</textarea>
+            <br>
+            <br>
+            <label class="inputText">Image</label>
+            <div class="image_container">
+                <br>
+                <img src="{{url_for('vacations_view.get_image', image_name = (vacation.photoFileName if vacation.photoFileName else '---'))}}" onclick="userClickedToChangeImage()" id="uploadFile" style="width: 300px; height: 300px;">
+                <p class="overlay-text" onclick="userClickedToChangeImage()">Add image</p>
+            </div>
+            <input type="file" id="image_file" name="image" accept="image/*" onchange="loadFile(event)" style="display: none;">
+            <br>
+            
+            <button class="customButton">Update</button>
+
+    </form>
+    <br>
+    <br>
+    <br>
+    
+</div>
+
+{% endblock content %}

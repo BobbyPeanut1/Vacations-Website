@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+Add vacation
+{% endblock title %}
+
+
+{% block content %}
+<div class="insert-form-wrapper">
+    <h1>Add another vacation here!</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label class="inputText">Country</label>
+        <select id="ad" name="country_name" class="form-input" required>
+        {% for country in countries_dicts %}
+        <option value='{{country["countryId"]}}'>{{country["countryName"]}}</option>
+        {% endfor %}
+        </select>
+        <br>
+        <label class="inputText">Start date</label>
+        <input type="date" name="start_date" class="form-input" required>
+        <br>
+        <label class="inputText">End date</label>
+        <input type="date" name="end_date" class="form-input" required>
+        <br>
+        <label class="inputText">Price</label>
+        <input type="number" name="price" class="form-input" min="0" max="10000" required>
+        <br>
+        <label class="inputText">Description</label>
+        <textarea type="text" name="description" class="form-input" minlength="0" maxlength="800" cols="5" rows="5" required></textarea>
+        <br>
+        <br>
+        <label class="inputText">Image</label>
+        <div class="image_container">
+            <br>
+            <img src="{{url_for('static', filename='images/vacation_images/no-image-icon-23485.png')}}" onclick="userClickedToChangeImage()" id="uploadFile" style="width: 300px; height: 300px;">
+            <p class="overlay-text" onclick="userClickedToChangeImage()">Add image</p>
+        </div>
+        <input type="file" id="image_file" name="image" accept="image/*" onchange="loadFile(event)" style="display: none;">
+        <br>
+        <br>
+        <button class="customButton">Add vacation</button>
+        
+    </form>
+    <br>
+
+</div>
+
+{% endblock content %}

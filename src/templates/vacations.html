@@ -1,0 +1,96 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+Vacations
+{% endblock title %}
+
+
+{% block content %}
+
+{% set current_user = session.get("current_user") %}
+{% if current_user["roleId"] != admin_role %}
+    <div class="vacationOptionsContainer">
+        <div class="vacationOptions card" style="width: 25rem;">
+            <div class="card-body">
+            <h5 class="card-title">See our amazing vacations!</h5>
+            <p class="card-text">browse our dozens of amazing locations you can visit right now!</p>
+            <br>
+            <p class="card-text">How would you like to view your vacations?</p>
+            <label>I want to see...</label>
+            <br>
+            <select onchange="changeVacationsView(this)" class="form-select" aria-label="Default select example">
+                <option selected value="allVacations">All vacations</option>
+                <option value="LikedVacations">My liked Vacations</option>
+            </select>
+            <label>Ordered by...</label>
+            <br>
+            <select onchange="changeVacationsOrder(this)" class="form-select" aria-label="Default select example">
+                <option selected value="orderStartDate">Start date</option>
+                <option value="orderPrice">Price</option>
+                <option value="likedAmount">Amount of likes</option>
+            </select>
+            </div>
+        </div>
+    </div>
+
+
+    <input type="hidden" value="{{vacationLikeCount}}" id="likeAmount">
+    <input type="hidden", value="{{usersLikedVacations}}" id="userLikes">
+{% endif %}
+
+<div class="vacationGrid">
+    {% for vacation in vacations %}
+    {% set vacation_id = vacation.vacationId %}
+    
+    <div class="vacationCard" id="card{{vacation_id}}">
+        <div class="image">
+            <img src="{{url_for('vacations_view.get_image', image_name = (vacation.photoFileName if vacation.photoFileName else '---'))}}" class="vacationImage rounded-top">
+            {% if current_user["roleId"] == admin_role %}
+            <a href="{{url_for('vacations_view.edit_vacation', id = vacation.vacationId)}}">
+                <button class="editVacation btn btn-primary rounded-pill">
+                    <img src="{{url_for('static', filename='images/misc/edit.png')}}" width="16vw" height="16vh">
+                    Edit
+                </button>
+            </a>
+
+            <a href="{{url_for('vacations_view.delete_vacation', id = vacation.vacationId)}}">
+                <button class="deleteVacation btn btn-primary rounded-pill" method onclick="confirmDelete()">
+                    <img src="{{url_for('static', filename='images/misc/delete.png')}}" width="16vw" height="16vh">
+                    Delete
+                </button>
+            </a>
+            {% endif %}
+            <p class="countryName">{{countries_dicts[vacation.countryId - 1]["countryName"]}}</p>
+        </div>
+
+        <div class="vacationDetailsAndLikes" id="detailsAndLikes{{vacation_id}}">
+            <div class="vacationDetails">{{vacation.vacationStartDate}}<span class="vacationArrowSymbol">g</span> {{vacation.vacationEndDate}}</div>
+
+            {% if current_user["roleId"] != admin_role %}
+            <div class="vacationLikes">
+                {# javascript syntax does'nt recognize jinja syntax and looks at {{variable}} as an error despite it working and getting the right variable #}
+                <div class="heart" onclick="changeLikeStateAndSubmit({{vacation_id}})"></div>
+                <span class="vacationLikeAmount{{vacation_id}}">0</span>
+            </div>
+
+            <form method="post" action="{{url_for('like_view.like_vacation')}}" class="hiddenLikeUnlikeInputForm"  id = "likeForm{{vacation_id}}">
+                {# javascript syntax does'nt recognize jinja syntax and looks at {{variable}} as an error despite it working and getting the right variable #}
+                <input type="submit" onclick="addLikeSubmit({{vacation_id}})" value="{{vacation_id}}" id="like{{vacation_id}}" class="hiddenLikeInputSubmit">
+            </form>
+
+            <form method="post" action="{{url_for('like_view.unlike_vacation')}}" class="hiddenLikeUnlikeInputForm"  id = "unLikeForm{{vacation_id}}">
+                {# javascript syntax does'nt recognize jinja syntax and looks at {{variable}} as an error despite it working and getting the right variable #}
+                <input type="submit" onclick="addUnlikeSubmit({{vacation_id}})" value="{{vacation_id}}" id="unlike{{vacation_id}}" class="hiddenUnlikeInputSubmit">
+            </form>
+
+            {% endif %}
+        </div>
+
+        <div class="vacationDescription" onclick="changeTextDisplay(this)">{{vacation.vacationDescription}}</div>
+        <div class="vacationPrice"><div class="price btn btn-primary btn-lg">{{vacation.vacationPrice}}$</div></div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

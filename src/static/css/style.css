@@ -1,0 +1,1031 @@
+/* website fonts */
+
+@font-face {
+    font-family: logoFont;
+    src: url(../fonts/mainstay/Mainstay.ttf);
+}
+
+@font-face {
+    font-family: welcomeFont;
+    src: url(../fonts/milestone/MilestoneFreeVersion-Script.otf);
+}
+
+@font-face {
+    font-family: titleFont;
+    src: url(../fonts/roman_sd/Roman\ SD.ttf);
+}
+
+@font-face {
+    font-family: loginTitleFont;
+    src: url(../fonts/philosopher/Philosopher-Bold.ttf);
+}
+
+
+@font-face {
+    font-family: vacationTitleFont;
+    src: url(../fonts/dream_cottage/DreamCottage-Regular.otf);
+}
+
+@font-face {
+    font-family: vacationArrowSymbol;
+    src: url(../fonts/kg_arrows/KGArrows.ttf);
+}
+
+@font-face {
+    font-family: globeSymbolFont;
+    src: url(../fonts/planets/Planets.otf);
+}
+
+/* basic html changes */
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    text-align: center;
+}
+
+/* writing ::after creates a pseudo element that we can put an image on and manipulate it
+unlike the body tag itself we can set opacity and filters.
+This is the image for every page that's not the home page */
+body::after{
+    content: "";
+    background-image: url('/static/images/background_images/wallpaper.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    opacity: 0.9;
+    z-index: -1;
+    filter: brightness(80%); 
+}
+
+/* layout */
+.layout{
+    box-sizing: border-box;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 10% 85% 5%;
+}
+
+.layout > *{
+    border: 1px solid black;
+    grid-column: span 3;
+    overflow: auto;
+}
+
+footer{
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(../images/background_images/nav_background_images/nav-background-image-1.jpg);
+    background-position: right;
+    background-repeat: repeat-x;
+}
+
+/* navbar */
+.navigation-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;    
+    box-sizing: border-box;
+    background-image: url(../images/background_images/nav_background_images/nav-background-image-1.jpg);
+    background-position: right;
+    background-repeat: repeat-x;
+    align-items: center;
+}
+
+.navigation-options, .navigation-auth-options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 30px;
+    align-content: end;
+    gap: 0.6vw;
+    white-space: nowrap;
+    margin-left: auto;
+    padding-right: 2vw; 
+}
+
+.navigation-options{
+    margin-left: 0;
+    padding-left: 1vw;
+    justify-content: start;
+    gap: 2.3vw;
+}
+
+.navigation-options > a, .navigation-auth-options > a{
+    color: black;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: 0.3s;
+    transition: 300ms ease-in-out;
+    white-space: nowrap
+}
+
+.navigation-options > a:hover, .navigation-auth-options > a:hover {
+    transform: scale(1.2);
+    color: rgb(18, 20, 153);
+}
+
+.webName{
+    font-family: logoFont;
+    font-size: 3.6rem;
+    color: rgb(255, 136, 57);
+    margin: 0 auto;
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.navigation-auth-options span:first-child {
+    font-family: welcomeFont;
+    padding: 5px;
+    font-size: 2rem;
+    color: rgb(18, 20, 153);
+    white-space: nowrap;
+    animation: helloAnimation 900ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes helloAnimation {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+
+    50% {
+        transform: translateX(0px) translateY(-5px);
+    }
+
+    100% {
+        transform: translateX(0px) translateY(0px);
+    }
+}
+
+/* active is given as an id because the specificity of the .navigation > a class is greater than an active class we can give it.
+we use an id because it will be unique for every page */
+#active{
+    transform: scale(1.2);
+    color: rgb(18, 20, 153);
+    text-shadow: 7px 7px 10px rgb(18, 20, 153);
+}
+
+/* home page css */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    align-items: center;
+    background-image: url(../images/background_images/background-image-1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: changeBackgroundImage 12000ms infinite;
+    image-rendering: optimizeSpeed;
+    box-sizing: border-box;
+}
+
+@keyframes changeBackgroundImage {
+    0% {
+        background-image: url(../images/background_images/background-image-1.jpg);
+    }
+
+    25% {
+        background-image: url(../images/background_images/background-image-2.jpg);
+    }
+
+    50% {
+        background-image: url(../images/background_images/background-image-3.jpg);
+    }
+
+    75% {
+        background-image: url(../images/background_images/background-image-4.jpg);
+    }
+
+    100% {
+        background-image: url(../images/background_images/background-image-1.jpg);
+    }
+}
+
+.home-title-box {
+    margin-top: 5vh;
+    background-color: rgba(69, 149, 202, 0.5);
+    backdrop-filter: blur(40px);
+    box-shadow: 7px 7px 20px rgb(156, 229, 191);
+    border-radius: 70px;
+    width: 50%;
+    height: auto;
+    color: white;
+    animation: leftRightHomeTitle 5000ms infinite;
+}
+
+@keyframes leftRightHomeTitle {
+    0% {
+        transform: translateX(0px);
+    }
+
+    25% {
+        transform: translateX(30px);
+    }
+
+    50% {
+        transform: translateX(30px);
+    }
+
+    75% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+
+.home-title-text {
+    font-family: loginTitleFont;
+    font-size: 1.8rem;
+}
+
+
+
+.home-text-box {
+    margin-top: 5vh;
+    padding: 2%;
+    background-color: rgba(69, 149, 202, 0.3);
+    backdrop-filter: invert(80%);
+    box-shadow: -7px 7px 20px rgb(156, 229, 191);
+    border-radius: 70px;
+    animation: rightLeftHomeText 5000ms infinite;
+
+}
+
+@keyframes rightLeftHomeText {
+    0% {
+        transform: translateX(0px);
+    }
+
+    25% {
+        transform: translateX(-30px);
+    }
+
+    50% {
+        transform: translateX(-30px);
+    }
+
+    75% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+
+
+.home-welcome-text {
+    font-family: loginTitleFont;
+    font-size: 1.8rem;
+    color: white;
+    z-index: 1;
+}
+
+.vacationsLinkFromHome {
+    text-decoration: none;
+    transition: 200ms ease-in-out;
+    color: rgb(61, 192, 248);
+    z-index: 1;
+}
+
+.vacationsLinkFromHome:hover {
+    animation: rightLeft 200ms ease-in-out;
+    padding: 0.7%;
+    border: 1px solid black;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(61, 192, 248, 0.5);
+    border-radius: 70px;
+    cursor: pointer;
+}
+
+@keyframes rightLeft {
+    0% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(30px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.home-welcome-text .large {
+    font-size: larger;
+}
+
+.home-welcome-text .dotted-line-larger {
+    font-size: larger;
+    text-decoration: underline rgb(45, 145, 199);
+    font-style: italic;
+    animation: easyWayLeftRight 3000ms infinite;
+}
+
+@keyframes easyWayLeftRight {
+    0% {
+        transform: translateX(0px);
+    }
+
+    35% {
+        transform: translateX(-50px);
+    }
+
+    45% {
+        transform: translateX(20px);
+    }
+
+    50% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+/* forms - register */
+
+.form-registration-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 99vw;
+    height: 100vh;
+    align-content: center;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+}
+
+.register-title {
+    font-family: loginTitleFont;
+    text-shadow: 5px 5px 5px rgb(30, 70, 138);
+}
+
+.register-title > h1{
+    font-size: 3rem;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.form-registration {
+    font-family: titleFont;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.inputText {
+    font-size: 2.3em;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+label{
+    padding: 0.15em;
+}
+
+.customButton {
+    padding: 0.8em;
+    border: 1px solid gray;
+    background-color: #B4886B;
+    border-radius: 5px;
+    transition: all 400ms ease-in-out;
+    text-decoration: none;
+    color: black;
+}
+
+@keyframes wobble {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    20% {
+        transform: rotateZ(-30deg);
+    }
+
+    67% {
+        transform: rotateZ(30deg);
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+.customButton:hover,
+.customButton:focus {
+    animation: wobble 400ms ease-in-out;
+    padding: 1.6em;
+    border: 1px solid gray;
+    font-weight: bold;
+    color: goldenrod;
+    background-color: darkslateblue;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.linkToLoginBox {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.loginLink {
+    text-decoration: none;
+    transition: 200ms ease-in-out;
+}
+
+@keyframes rightLeft {
+    0% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(30px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.loginLink:hover,
+.loginLink:focus {
+    animation: rightLeft 200ms ease-in-out;
+    padding: 0.5em;
+    border: 1px solid black;
+    font-weight: bold;
+    color: goldenrod;
+    background-color: slateblue;
+    border-radius: 70px;
+    cursor: pointer;
+}
+
+.globe {
+    width: 20px;
+    height: 20px;
+}
+
+.rotatingGlobe {
+    font-family: globeSymbolFont;
+    color: green;
+    font-size: 2rem;
+    animation: globeRotate 2000ms infinite;
+    padding-bottom: 5%;
+}
+
+@keyframes globeRotate {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    25% {
+        transform: rotateZ(90deg);
+    }
+
+    50% {
+        transform: rotateZ(0deg);
+    }
+
+    75% {
+        transform: rotateZ(-80deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+/* forms - login */
+.login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.login-form-wrapper h1 {
+    font-size: 3rem;
+    text-shadow: 5px 5px 5px rgb(30, 70, 138);
+}
+
+.login-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.email-input-box,
+.password-input-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.email-input-box input,
+.password-input-box input {
+    padding: 0.5em;
+    border: 2px solid black;
+    color: black;
+    border-radius: 7px;
+    font-size: 1.2em;
+    background-color: white;
+
+}
+
+.email-input-box input:focus,
+.password-input-box input:focus {
+    outline: 2px solid rgb(232, 147, 61);
+}
+
+.email-input-box > .iconBox,
+.password-input-box > .iconBox{
+    display: flex;
+    align-items: center;
+}
+
+@keyframes loginWobble {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    20% {
+        transform: rotateZ(-30deg);
+    }
+
+    67% {
+        transform: rotateZ(30deg);
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+.register-link-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+}
+
+/* forms - insert/edit vacations */
+
+.insert-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    gap: 0.7em;
+}
+
+
+.insert-form-wrapper h1 {
+    font-size: 4rem;
+    text-shadow: 5px 5px 5px rgb(30, 70, 138);
+}
+ 
+.insert-form-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7em;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    margin: auto;
+    font-size: 1.2rem;
+    padding: 0.6em;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+}
+
+.form-input:focus {
+    outline: 2px solid rgb(232, 147, 61);
+    border: none;
+}
+
+.image_container {
+    position: relative;
+    display: inline-block;
+  }
+  
+.image_container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000000; 
+  color: #fff; 
+  padding: 0.8em; 
+  font-size: 0.8rem; 
+  text-align: center; 
+  cursor: pointer;
+}
+
+/* sort vacation div */
+.vacationOptionsContainer{
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.vacationOptionsContainer > .vacationOptions{
+    border: 1px solid black;
+    background-color: whitesmoke;
+}
+
+/* vacation grid and cards */
+.vacationGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5em;
+    padding: 4em 3.6em;
+}
+
+
+.vacationCard{
+    position: relative;
+    margin-left: 5%;
+    width: 500px;
+    height: 500px;
+    transition: 500ms;
+    background-color: #F2F3F4;
+    border-radius: 25px;
+    box-shadow: 3px 5px 0px 4px rgba(128, 128, 128, 0.5);
+}
+
+.vacationCard:hover{
+    transform: scale(1.2);
+    box-shadow: 3px 5px 5px 4px rgba(255, 255 ,255 , 0.85);
+    cursor: pointer;
+}
+
+.vacationCard:hover .vacationArrowSymbol {
+    animation: shake 500ms ease-out;
+}
+
+@keyframes shake {
+    0% {transform: rotate(0deg);}
+    25% {transform: rotate(360deg);}
+    50% {transform: rotate(0deg);}
+    75% {transform: rotate(-45deg);}
+    100% {transform: rotate(0deg);}
+
+}
+
+/* image container and contents */
+.image{
+    border-radius: 25px;
+    position: relative;
+    width: inherit;
+    height: 200px;
+}
+
+.vacationImage{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    filter: brightness(70%);
+}
+
+
+.countryName{
+    z-index: 1;
+    font-family: vacationTitleFont;
+    font-weight: bold;
+    position: absolute;
+    top: 18vh;
+    left: 2vw;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+}
+
+/* description line and likes */
+.vacationDetailsAndLikes{
+    display: flex;
+    border: 1px solid black;
+    background-color: lightgreen;
+    width: 500px;
+    height: 30px;
+}
+
+.vacationArrowSymbol{
+    display: inline-block;
+    font-family: vacationArrowSymbol;
+    font-size: 1.3rem;
+    color: green;
+    font-weight: bold;
+    position: relative;
+}
+
+.vacationDetails{
+    display: flex;
+    align-items: center;    
+    font-family: vacationTitleFont;
+    font-weight: bold;
+    text-align: left;
+    font-size: small;
+    white-space: nowrap;
+    width: 50%;
+    padding-left: 2%;
+    height: 32px;
+    gap: 0.2em;
+}
+
+
+.vacationLikes{
+    margin-left: auto;
+    padding-right: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+}
+
+
+.heart {
+    cursor: pointer;
+    display: inline-block;
+    --c: gray;
+    width: 20px;
+    aspect-ratio: 1;
+    --background:
+        radial-gradient(circle at 60% 65%, var(--c) 64%, #0000 65%) top left/50% 50%,
+        radial-gradient(circle at 40% 65%, var(--c) 64%, #0000 65%) top right/50% 50%,
+        conic-gradient(from -45deg at 50% 85.5%, var(--c) 90deg, #0000 0) bottom/100% 50%;
+
+    background: var(--background);
+    background-repeat: no-repeat;
+}
+
+.heartClick {
+    --c: red;
+    animation: likeClick 350ms;
+    animation-iteration-count: 1;
+}
+
+
+
+@keyframes likeClick {
+    0% {
+        transform: scale(100%);
+    }
+
+    75% {
+        transform: scale(130%);
+    }
+
+    100% {
+        transform: scale(100%);
+    }
+}
+
+/* description and likes divs */
+.vacationDescription{
+    position: relative;
+    border: 1px solid black;
+    border-bottom: none;
+    box-sizing: border-box;
+    padding: 5%;
+    width: 500px;
+    height: 210px;
+    overflow: hidden;
+}
+
+/* long text shadows and scroll */
+.addAfterShadow::after{
+    content: "";
+    position: absolute; top: 0; bottom: 0; left: -15px; right: -15px;
+    box-shadow: inset rgba(0, 0, 0, 0.8) 0 -15px 10px;
+}
+
+.removeAfterShadow::after{
+    content: "";
+    box-shadow: none;
+}
+
+.scrollText{
+    overflow-y: scroll;
+}
+
+.scrollText::-webkit-scrollbar {
+    width: 0.3vw;
+}
+  
+/* Empty space on bar when we're not on it */
+.scrollText::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+  
+/* scroll bar color */
+.scrollText::-webkit-scrollbar-thumb {
+    background: #888;
+}
+  
+/* makes it darker on hover to notice scroll */
+.scrollText::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.vacationPrice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-top: none;
+    height: 60px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.price{
+    width: 20vw;
+}
+
+.vacationCard:hover .price {
+    animation: rightLeftPrice 500ms  1;
+}
+
+@keyframes rightLeftPrice {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(30px);
+    }
+    75% {
+        transform: translateX(-30px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+/* hide forms and submit */
+.hiddenLikeUnlikeInputForm, .hiddenLikeInputSubmit, .hiddenUnlikeInputSubmit{
+    display: none;
+}
+
+
+/* edit/delete vacation buttons */
+
+.editVacation, .deleteVacation{
+    display: flex;
+    position: absolute;
+    width: 4vw;
+    height: 4vh;
+    bottom: 75%;
+    left: 5%;
+    z-index: 1;
+    font-weight: bold;
+    font-size: large;
+}
+
+.deleteVacation{
+    width: 5vw;
+    left: 23%;
+}
+
+.editVacation > img{
+    margin-bottom: 0.9vh;
+}
+
+.deleteVacation > img{
+    margin-bottom: 0.9vh;
+}
+
+.image > .editVacation > a, .image > .deleteVacation > a{
+    color: white;
+    text-decoration: none;
+
+}
+
+/* error pages */
+.wrapper404Gif, .wrapper500Gif{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+    height: 100%;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.title404BoxGif, .title500GifBox {
+    text-shadow: 7px 7px 10px rgb(9, 51, 115);
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    color: rgb(9, 51, 115);
+    font-family: loginFont; 
+}
+
+.gif404Container, .gif500Container{
+    border-color: rgb(30, 70, 138);
+    height: 43.4vh;
+    width: 36.3vw;
+    box-shadow: 5px 10px 15px rgb(30, 70, 138);
+    animation: loginWobble 360ms ease-in-out 2;
+}
+
+.gif404, .gif500{
+    height: 43.4vh;
+    width: 36.3vw;    
+}
+
+/* error message */
+.error {
+    position: absolute;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 0.8em;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.8);
+    backdrop-filter: blur 40px;
+    border-radius: 10px;
+    opacity: 0;
+    margin-left: 0;
+    margin-top: 1.4em;
+    animation: slideInOut 3500ms;
+}
+
+
+@keyframes slideInOut {
+    0% {
+        transform: translateX(0vw) translateY(-10vw);
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(20vw) translateY(-4vw);
+        opacity: 1;
+        scale: 1.4;   
+    }
+    70% {
+        transform: translateX(32vw) translateY(-5vw);
+        opacity: 1;
+        scale: 1.4;
+    }
+    100% {
+        transform: translateX(-20vw) translateY(-20vw);
+        opacity: 0;
+    }
+}
+
+
+
+

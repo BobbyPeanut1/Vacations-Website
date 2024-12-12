@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+Server Error
+{% endblock title %}
+
+
+{% block content %}
+
+
+<div class="wrapper500Gif">
+    <div class="title500GifBox">
+        <h1>An unexpected error has occurred</h1>
+    </div>
+    <br>
+    <div class="gif500Container">
+        <img class="gif500" src="../static/images/error_pages_gifs/500.gif" alt="500 internal server error gif">
+    </div>
+    <br>
+    <br>
+    <a class="customButton" href="{{url_for('home_view.home')}}">Go back home</a>
+    
+</div>
+
+{% endblock content %}

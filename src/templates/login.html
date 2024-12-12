@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} 
+login
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="login-form-wrapper">
+    <h1>Login Here</h1>
+
+    <form method="post">
+        <label for="email" class="inputText" >Email</label>
+        <div class="email-input-box">
+            <input type="email" id="email" placeholder="example123@email.com" value="{{credentials.email if credentials.email else ''}}" name="email"  minlength="2" maxlength="100" required>
+            <i class='bx bxs-user iconBox'></i>
+        </div>
+        <br>
+        <label for="password" class="inputText">Password</label>
+        <div class="password-input-box">
+            <input type="password" id="password" name="password" minlength="5" maxlength="50" required>
+            <i class='bx bxs-lock iconBox'></i>
+        </div>
+        <br>
+
+        <button class="customButton">submit</button>
+        
+        <br>
+        <div class="register-link-box">
+            <span>Don't have an account yet?</span>
+            <a class="loginLink" href="{{url_for('auth_view.register')}}">Register here</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
